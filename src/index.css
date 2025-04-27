@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+.navbar-link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-link:hover {
+  transform: scale(1.05);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #10b981, #059669);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after,
+.navbar-link-active::after {
+  width: 100%;
+}
+
+.navbar-link-active {
+  font-weight: 500;
+}
+
+nav {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-scrolled {
+  transform: translateY(-4px);
+}
+
+/* Floating effect */
+nav > div > div {
+  position: relative;
+}
+
+nav > div > div::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(to right, #10b981, #059669);
+  border-radius: 9999px;
+  padding: 1px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+nav > div > div:hover::before {
+  opacity: 0.5;
+}
+
+/* Dynamic glow effect */
+nav > div > div::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(to right, #10b981, #059669);
+  border-radius: 9999px;
+  filter: blur(8px);
+  opacity: 0.1;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+nav > div > div:hover::after {
+  opacity: 0.2;
+}
+
+/* Pulsing glow animation */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}
+
+nav > div > div::after {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
